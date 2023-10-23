@@ -7,7 +7,7 @@ export class RegisterController {
     constructor(private readonly userService: UserService) { }
 
     @Post()
-    register(@Body() createUserDto: CreateUserDto) {
-        return this.userService.create(createUserDto);
+    async register(@Body() createUserDto: CreateUserDto) {
+        return await this.userService.create(createUserDto);
     }
 }

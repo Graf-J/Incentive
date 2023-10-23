@@ -1,23 +1,52 @@
-import { Injectable } from '@nestjs/common';
+import { ConflictException, Injectable } from '@nestjs/common';
 import { CreateTransactionDto } from './dto/create-transaction.dto';
-import { UpdateTransactionDto } from './dto/update-transaction.dto';
+import { InjectModel } from '@nestjs/mongoose';
+import { Transaction, TransactionDocument } from './transaction.schema';
+import { Model } from 'mongoose';
+import { UserService } from 'src/user/user.service';
 
 @Injectable()
 export class TransactionService {
-  create(createTransactionDto: CreateTransactionDto) {
-    return 'This action adds a new transaction';
+  constructor(
+    @InjectModel(Transaction.name) private readonly transactionModel: Model<TransactionDocument>,
+    private readonly userService: UserService
+  ) { }
+
+  async create(createTransactionDto: CreateTransactionDto) {
+    const sender = await this.userService.findOne(createTransactionDto.sender);
+    if (!sender) {
+      throw new ConflictException("Sender doesn't exist");
+    }
+
+    const receiver = await this.userService.findOne(createTransactionDto.receiver);
+    if (!receiver) {
+      throw new ConflictException("Receiver doesn't exist");
+    }
+
+    if (sender.creditsToSend < createTransactionDto.credits) {
+      throw new ConflictException('Sender has not enough credits to send');
+    }
+
+    const transaction = new this.transactionModel({
+      sender,
+      receiver,
+      credits: createTransactionDto.credits,
+      createdAt: new Date(),
+    });
+    sender.creditsToSend -= createTransactionDto.credits;
+    receiver.receivedCredits += createTransactionDto.credits;
+
+    await Promise.all([sender.save(), receiver.save(), transaction.save()]);
   }
 
-  findAll() {
-    return `This action returns all transaction`;
+  async findAll() {
+    return await this.transactionModel.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} transaction`;
-  }
-
-  update(id: number, updateTransactionDto: UpdateTransactionDto) {
-    return `This action updates a #${id} transaction`;
+  async findOne(id: string) {
+    return await this.transactionModel.findById(id)
+      // .populate('sender')
+      // .populate('receiver')
   }
 
   remove(id: number) {

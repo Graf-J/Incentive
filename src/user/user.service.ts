@@ -23,15 +23,30 @@ export class UserService {
     return await this.userModel.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
+  async findOne(id: string) {
+    return await this.userModel.findById(id);
   }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
+  async update(id: string, updateUserDto: UpdateUserDto) {
+    // const user = await this.findOne(id);
+    // Object.assign(user, {
+    //   name: updateUserDto.name,
+    //   password: updateUserDto.password,
+    // });
+    // await user.save();
+
+    this.userModel.updateOne(
+      { _id: id },
+      {
+        $set: {
+          name: updateUserDto.name,
+          password: updateUserDto.password
+        }
+      }
+    )
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} user`;
+  async remove(id: string) {
+    await this.userModel.deleteOne({ _id: id })
   }
 }
