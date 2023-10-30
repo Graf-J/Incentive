@@ -48,8 +48,4 @@ export class TransactionService {
       // .populate('sender')
       // .populate('receiver')
   }
-
-  remove(id: number) {
-    return `This action removes a #${id} transaction`;
-  }
 }
