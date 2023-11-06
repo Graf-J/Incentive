@@ -32,22 +32,24 @@ export class UserService {
   }
 
   async update(id: string, updateUserDto: UpdateUserDto) {
-    // const user = await this.findOne(id);
-    // Object.assign(user, {
-    //   name: updateUserDto.name,
-    //   password: updateUserDto.password,
-    // });
-    // await user.save();
+    const user = await this.findOne(id);
+    Object.assign(user, {
+      name: updateUserDto.name,
+      password: updateUserDto.password,
+      roles: updateUserDto.roles
+    });
+    await user.save();
 
-    this.userModel.updateOne(
-      { _id: id },
-      {
-        $set: {
-          name: updateUserDto.name,
-          password: updateUserDto.password
-        }
-      }
-    )
+    // this.userModel.updateOne(
+    //   { _id: id },
+    //   {
+    //     $set: {
+    //       name: updateUserDto.name,
+    //       password: updateUserDto.password,
+    //       roles: updateUserDto.roles
+    //     }
+    //   }
+    // )
   }
 
   async remove(id: string) {

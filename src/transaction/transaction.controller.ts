@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Param, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, UseGuards, Request } from '@nestjs/common';
 import { TransactionService } from './transaction.service';
 import { CreateTransactionDto } from './dto/create-transaction.dto';
 import { AuthGuard } from '../auth/auth.guard';
@@ -14,7 +14,8 @@ export class TransactionController {
 
   @UseGuards(AuthGuard)
   @Get()
-  async findAll() {
+  async findAll(@Request() r) {
+    console.log(r.userId);
     return await this.transactionService.findAll();
   }
 

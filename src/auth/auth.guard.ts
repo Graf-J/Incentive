@@ -17,10 +17,10 @@ export class AuthGuard implements CanActivate {
     try {
       const payload = await this.jwtService.verifyAsync(token);
       request.userId = payload.sub;
+      request.userRoles = payload.roles;
 
       return true;
     } catch (error) {
-      console.log("Sack zefix")
       Logger.error(error);
 
       return false;

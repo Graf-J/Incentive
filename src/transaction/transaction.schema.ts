@@ -6,7 +6,8 @@ export type TransactionDocument = HydratedDocument<Transaction>;
 
 @Schema()
 export class Transaction {
-    @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'User' })
+    // Put Index for each Prop I want to search for (speed for big amounts of data)
+    @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'User', index: true })
     sender: User;
 
     @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'User' })
