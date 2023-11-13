@@ -1,0 +1,22 @@
+{
+  "targetDefaults": {
+    "build": {
+      "cache": true
+    },
+    "lint": {
+      "cache": true
+    },
+    "test": {
+      "cache": true
+    }
+  },
+  "affected": {
+    "defaultBase": "main"
+  },
+  "pluginsConfig": {
+    "@nx/js": {
+      "analyzeSourceFiles": true
+    }
+  },
+  "nxCloudAccessToken": "NGJhYjgwZDEtNDM5Yi00MDRiLThiYjYtMmU3ZTc3MDg0N2U1fHJlYWQtd3JpdGU="
+}

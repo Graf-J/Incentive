@@ -1,0 +1,54 @@
+{
+  "name": "incentive-backend",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/incentive-backend/src",
+  "projectType": "application",
+  "targets": {
+    "serve": {
+      "executor": "@nx/js:node",
+      "options": {
+        "buildTarget": "incentive-backend:build"
+      },
+      "configurations": {
+        "debug": {
+          "inspect": "inspect"
+        }
+      }
+    },
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/tinf21_incentive",
+        "main": "src\\main",
+        "tsConfig": "apps/incentive-backend/tsconfig.build.json"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "apps/incentive-backend/src/**/*.ts",
+          "test/**/*.ts"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/incentive-backend"],
+      "options": {
+        "passWithNoTests": true,
+        "jestConfig": "apps/incentive-backend/jest.config.app.ts"
+      }
+    },
+    "e2e": {
+      "executor": "@nx/jest:jest",
+      "options": {
+        "passWithNoTests": true,
+        "jestConfig": "apps/incentive-backend/jest.config.e2e.ts"
+      }
+    }
+  },
+  "tags": []
+}
