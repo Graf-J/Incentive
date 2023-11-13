@@ -1,3 +1,7 @@
+.env
+.nx
+tmp
+
 # compiled output
 /dist
 /node_modules
@@ -36,3 +40,4 @@ lerna-debug.log*
 !.vscode/extensions.json
 
 .nx/cache
+.angular
