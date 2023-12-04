@@ -1,6 +1,6 @@
 {
   "extends": "./tsconfig.json",
-  "include": ["src/**/*.ts"],
+  "include": ["src/**/*.ts", "../../libs/incentive-frontend/http-client/src/lib/auth.service.ts"],
   "compilerOptions": {
     "types": ["jest", "node"]
   }

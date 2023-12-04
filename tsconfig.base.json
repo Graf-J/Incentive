@@ -8,6 +8,20 @@
     "target": "ES2021",
     "module": "commonjs",
     "skipLibCheck": true,
-    "baseUrl": "./"
+    "baseUrl": "./",
+    "paths": {
+      "@tinf21/incentive-http-client": [
+        "libs/incentive-frontend/http-client/src/lib/http-client.module.ts"
+      ],
+      "home": ["libs/incentive-frontend/home/src/index.ts"],
+      "incentive-frontend-http-client": [
+        "libs/incentive-frontend/http-client/src/index.ts"
+      ],
+      "incentive-frontend/home/home": [
+        "libs/incentive-frontend/home/home/src/index.ts"
+      ],
+      "libs/home": ["apps/incentive-frontend/src/app/libs/home/src/index.ts"],
+      "login": ["lib/incentive-frontend/login/src/index.ts"]
+    }
   }
 }

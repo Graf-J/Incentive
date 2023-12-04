@@ -20,7 +20,7 @@
       "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/tinf21_incentive",
-        "main": "src\\main",
+        "main": "apps/incentive-backend/src/main",
         "tsConfig": "apps/incentive-backend/tsconfig.build.json"
       }
     },

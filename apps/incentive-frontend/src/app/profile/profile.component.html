@@ -1,0 +1,9 @@
+<div *ngIf="users">
+    <div *ngFor="let user of users">
+        <p>Id: {{ user._id }}</p>
+        <p>Name: {{ user.name }}</p>
+        <p>ReceivedCredits: {{ user.receivedCredits }}</p>
+        <p>CreditsToSend: {{ user.creditsToSend }}</p>
+        <hr>
+    </div>
+</div>

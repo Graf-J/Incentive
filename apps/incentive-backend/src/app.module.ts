@@ -18,7 +18,7 @@ process.env.MONGODB_URL = 'mongodb://localhost:27017/incencitive';
     JwtModule.register({
       global: true,
       secret: process.env.JWT_SECRET || 'SuperSecretToken',
-      signOptions: { expiresIn: '60s' },
+      signOptions: { expiresIn: '1d' },
     }),
   ],
   controllers: [],

@@ -1,0 +1,9 @@
+<div *ngIf="transactions">
+    <div *ngFor="let transaction of transactions">
+        <p>Id: {{ transaction._id }}</p>
+        <p>Sender: {{ transaction.sender }}</p>
+        <p>Receiver: {{ transaction.receiver }}</p>
+        <p>Credits: {{ transaction.credits }}</p>
+        <hr>
+    </div>
+</div>
